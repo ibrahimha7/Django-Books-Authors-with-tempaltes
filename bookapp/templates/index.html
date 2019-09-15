@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Books</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container" style="display: flex">
+        <form action="/new_book" method="post">
+            
+            <div class="form-group">
+                <h1
+                    style="border:solid 1px #343a40 ;background-color: #343a40;font-size: 39px; margin-right: 5px;color: aliceblue; padding: 2px;background-color: #343a40;font-size:38px">
+                    Add a Book</h1>
+                    {% if messages %}
+                    {% for message in messages %}
+                        <p class="{{message.tags}}">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+
+                {% csrf_token %}
+                <label>Title</label>
+                <input type="text" class="form-control" name="title">
+                <label>Notes</label>
+                <textarea class="form-control" name="desc" id="" cols="30" rows="10">
+                </textarea>
+                <br>
+                <input type="submit" value="Add" class="btn btn-success">
+            </div>
+        </form>
+
+        <table class="table" style="width: 70%">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Action</th>
+                </tr>
+            <tbody>
+                    {% for book in book_list_html %}
+                <tr>
+                    <th scope="row">{{book.id}}</th>
+                    <td>{{book.title}}</td>
+                    <td><a href="/books/{{book.id}}">View</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </thead>
+
+
+        </table>
+    </div>
+
+</body>
+
+</html>
