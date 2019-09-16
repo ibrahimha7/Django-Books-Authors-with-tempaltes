@@ -10,7 +10,7 @@ def index(request):
     context = {
         "book_list_html": book_list
     }
-    return render(request, "index.html", context)\
+    return render(request, "index.html", context)
 
 def new_book(request):
     
@@ -41,7 +41,7 @@ def add_author(request, num):
     
     c = Book.objects.get(id=book_id)
     d = Author.objects.get(id = add_author_id)
-    c.authors.add(d)
+    c.author.add(d)
     
     messages.add_message(request, messages.INFO, "Author added!")
     
